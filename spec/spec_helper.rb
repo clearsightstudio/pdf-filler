@@ -5,7 +5,8 @@ require 'webrat'
 require 'rack/test'
 require "sinatra"
 require 'thin'
-require "./app.rb"
+require 'pry'
+require 'pdf_filler'
 
 Webrat.configure do |conf|
   conf.mode = :rack

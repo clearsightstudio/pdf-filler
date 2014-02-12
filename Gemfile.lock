@@ -1,3 +1,15 @@
+PATH
+  remote: .
+  specs:
+    pdf_filler (0.0.1)
+      liquid
+      markdown
+      pdf-forms
+      prawn
+      rake
+      sinatra
+      thin
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -8,7 +20,6 @@ GEM
     diff-lcs (1.2.4)
     eventmachine (1.0.3)
     hashery (2.1.0)
-    json (1.7.7)
     kramdown (1.1.0)
     liquid (2.5.0)
     logutils (0.6.0)
@@ -41,7 +52,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rake (10.1.0)
+    rake (10.1.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -62,9 +73,9 @@ GEM
     slop (3.4.5)
     textutils (0.6.6)
       logutils (~> 0.5)
-    thin (1.5.1)
+    thin (1.6.1)
       daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
+      eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
     tilt (1.4.1)
     ttfunk (1.0.3)
@@ -77,16 +88,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  json (= 1.7.7)
-  liquid
-  markdown
-  pdf-forms
-  prawn
+  pdf_filler!
   pry
   rack-test
-  rake
   rspec
   simplecov
-  sinatra
-  thin
   webrat
