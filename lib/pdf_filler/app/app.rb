@@ -32,11 +32,5 @@ module PdfFiller
     get '/fields.json' do
       PdfFiller::Filler.new.get_fields( params['pdf'] ).to_json
     end
-
-    # get an HTML representation of the form
-    # e.g., /form.html?pdf=http://help.adobe.com/en_US/Acrobat/9.0/Samples/interactiveform_enabled.pdf
-    get '/form' do
-      liquid :form, :locals => { :pdf => params['pdf'], :fields => PdfFiller::Filler.new.get_fields( params['pdf'] ) }, :layout => :bootstrap
-    end
   end
 end
