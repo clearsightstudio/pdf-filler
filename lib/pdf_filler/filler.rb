@@ -1,5 +1,4 @@
 PATH_TO_PDFTK = ENV['PATH_TO_PDFTK'] || (File.exist?('/usr/local/bin/pdftk') ? '/usr/local/bin/pdftk' : '/usr/bin/pdftk')
-
 module PdfFiller
   class Filler
     #path to the pdftk binary
@@ -12,7 +11,7 @@ module PdfFiller
     def urldecode_keys hash
       output = Hash.new
       hash.each do |key, value|
-        output[ URI.unescape( key ) ] = value
+        output[ URI.unescape( key.to_s ) ] = value.to_s
       end
       output
     end
@@ -24,6 +23,7 @@ module PdfFiller
     # Given a PDF an array of fields -> values
     # return a PDF with the given fields filled out
     def fill( url, data )
+      url = url.to_s
       source_pdf = open( URI.escape( url ) )
       step_1_result = Tempfile.new( ['pdf', '.pdf'] )
       filled_pdf = Tempfile.new( ['pdf', '.pdf'] )
@@ -33,16 +33,17 @@ module PdfFiller
       @pdftk.fill_form source_pdf.path, step_1_result.path, data.find_all{ |key, value| !key[KEY_REGEX] }
       
       #Fill non-fillable fields (returning filled pdf)
-      Prawn::Document.generate filled_pdf.path, :template => step_1_result.path do |pdf|
-        pdf.font("Helvetica", :size=> 10)
-        fields = data.find_all { |key, value| key[KEY_REGEX] }
-        fields.each do |key, value|
-          at = key.match(KEY_REGEX)
-          pdf.go_to_page at[:page].to_i || 1
-          pdf.draw_text value, :at => [ at[ :x ].to_i, at[:y].to_i ]
-        end
-      end
-      filled_pdf
+      # Prawn::Document.generate filled_pdf.path, :template => step_1_result.path do |pdf|
+      #   pdf.font("Helvetica", :size=> 10)
+      #   fields = data.find_all { |key, value| key[KEY_REGEX] }
+      #   fields.each do |key, value|
+      #     at = key.match(KEY_REGEX)
+      #     pdf.go_to_page at[:page].to_i || 1
+      #     pdf.draw_text value, :at => [ at[ :x ].to_i, at[:y].to_i ]
+      #   end
+      # end
+      # filled_pdf
+      step_1_result
     end
     
     # Return a hash of all fields in a given PDF

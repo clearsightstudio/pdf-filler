@@ -15,9 +15,13 @@ GEM
   specs:
     Ascii85 (1.0.2)
     afm (0.2.0)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     coderay (1.0.9)
     daemons (1.1.9)
     diff-lcs (1.2.4)
+    erubis (2.7.0)
     eventmachine (1.0.3)
     hashery (2.1.0)
     kramdown (1.1.0)
@@ -88,6 +92,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
   pdf_filler!
   pry
   rack-test
