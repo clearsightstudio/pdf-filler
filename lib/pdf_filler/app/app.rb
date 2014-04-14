@@ -12,6 +12,7 @@ module PdfFiller
     set :views, File.dirname(__FILE__) + "/views"
     set :logging, true
     set :dump_errors, true
+    set :show_exceptions, true
 
     # documentation
     get '/' do
