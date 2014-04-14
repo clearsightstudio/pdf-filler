@@ -10,9 +10,11 @@ module PdfFiller
   class App < Sinatra::Base
     set :root, File.dirname(__FILE__)
     set :views, File.dirname(__FILE__) + "/views"
+    set :logging, true
+    set :dump_errors, true
 
     # documentation
-    get '/' do 
+    get '/' do
       markdown :index, :layout => :bootstrap, :layout_engine => :liquid
     end
 
