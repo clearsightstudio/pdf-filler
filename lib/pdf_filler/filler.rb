@@ -1,4 +1,4 @@
-PATH_TO_PDFTK = ENV['PATH_TO_PDFTK'] || (File.exist?('~/bin/pdftk') ? '~/bin/pdftk' : '/usr/bin/pdftk')
+PATH_TO_PDFTK = '~/bin/pdftk'
 module PdfFiller
   class Filler
     #path to the pdftk binary
