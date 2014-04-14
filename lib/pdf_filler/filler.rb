@@ -1,4 +1,4 @@
-PATH_TO_PDFTK = ENV['PATH_TO_PDFTK'] || (File.exist?('/usr/local/bin/pdftk') ? '/usr/local/bin/pdftk' : '/usr/bin/pdftk')
+PATH_TO_PDFTK = ENV['PATH_TO_PDFTK'] || (File.exist?('~/bin/pdftk') ? '~/bin/pdftk' : '/usr/bin/pdftk')
 module PdfFiller
   class Filler
     #path to the pdftk binary
@@ -19,7 +19,7 @@ module PdfFiller
     def initialize
       @pdftk = PdfForms.new(PATH_TO_PDFTK)
     end
-    
+
     # Given a PDF an array of fields -> values
     # return a PDF with the given fields filled out
     def fill( url, data )
@@ -27,11 +27,11 @@ module PdfFiller
       source_pdf = open( URI.escape( url ) )
       step_1_result = Tempfile.new( ['pdf', '.pdf'] )
       filled_pdf = Tempfile.new( ['pdf', '.pdf'] )
-      
+
       data = urldecode_keys data
       #Fill fillable fields (step 1)
       @pdftk.fill_form source_pdf.path, step_1_result.path, data.find_all{ |key, value| !key[KEY_REGEX] }
-      
+
       #Fill non-fillable fields (returning filled pdf)
       # Prawn::Document.generate filled_pdf.path, :template => step_1_result.path do |pdf|
       #   pdf.font("Helvetica", :size=> 10)
@@ -45,7 +45,7 @@ module PdfFiller
       # filled_pdf
       step_1_result
     end
-    
+
     # Return a hash of all fields in a given PDF
     def get_fields(url)
       #note: we're talking to PDFTK directly here
