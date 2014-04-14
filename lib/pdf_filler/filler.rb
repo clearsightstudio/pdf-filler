@@ -1,4 +1,4 @@
-PATH_TO_PDFTK = '~/bin/pdftk'
+PATH_TO_PDFTK = '/home/nc3webdev/bin/pdftk'
 module PdfFiller
   class Filler
     #path to the pdftk binary
