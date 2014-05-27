@@ -1,4 +1,5 @@
-PATH_TO_PDFTK = '/home/nc3webdev/bin/pdftk'
+# PATH_TO_PDFTK = '/home/nc3webdev/bin/pdftk'
+PATH_TO_PDFTK = '/usr/local/bin/pdftk'
 module PdfFiller
   class Filler
     #path to the pdftk binary
@@ -31,7 +32,6 @@ module PdfFiller
       data = urldecode_keys data
       #Fill fillable fields (step 1)
       @pdftk.fill_form source_pdf.path, step_1_result.path, data.find_all{ |key, value| !key[KEY_REGEX] }
-
       #Fill non-fillable fields (returning filled pdf)
       # Prawn::Document.generate filled_pdf.path, :template => step_1_result.path do |pdf|
       #   pdf.font("Helvetica", :size=> 10)
@@ -43,6 +43,8 @@ module PdfFiller
       #   end
       # end
       # filled_pdf
+
+      ` #{PATH_TO_PDFTK} #{step_1_result.path} flatten`
       step_1_result
     end
 
