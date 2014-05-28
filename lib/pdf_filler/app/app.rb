@@ -21,16 +21,7 @@ module PdfFiller
 
     # return a filled PDF as a result of post data
     post '/fill' do
-      if params['bulk'].present?
-        bulk = params['bulk']
-        params.delete("bulk")
-        # copy file
-        pdf = PdfFiller::Filler.new.fill( params['pdf'], params ).path, :type => "application/pdf", :filename => File.basename( params['pdf'] )
-        FileUtils.cp pdf, bulk
-        pdf
-      else
-        send_file PdfFiller::Filler.new.fill( params['pdf'], params ).path, :type => "application/pdf", :filename => File.basename( params['pdf'] ), :disposition => :inline
-      end
+      send_file PdfFiller::Filler.new.fill( params['pdf'], params ).path, :type => "application/pdf", :filename => File.basename( params['pdf'] ), :disposition => :inline
     end
 
     # get an HTML listing of all the fields
