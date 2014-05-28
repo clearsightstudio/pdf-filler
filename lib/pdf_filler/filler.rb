@@ -1,5 +1,5 @@
-# PATH_TO_PDFTK = '/home/nc3webdev/bin/pdftk'
-PATH_TO_PDFTK = '/usr/local/bin/pdftk'
+PATH_TO_PDFTK = '/home/nc3webdev/bin/pdftk'
+# PATH_TO_PDFTK = '/usr/local/bin/pdftk'
 module PdfFiller
   class Filler
     #path to the pdftk binary
