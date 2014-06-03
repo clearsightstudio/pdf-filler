@@ -44,8 +44,12 @@ module PdfFiller
       # end
       # filled_pdf
 
-      ` #{PATH_TO_PDFTK} #{step_1_result.path} flatten`
+      self.flatten(step_1_result.path)
       step_1_result
+    end
+
+    def flatten(path)
+      `#{PATH_TO_PDFTK} #{step_1_result.path} flatten`
     end
 
     # Return a hash of all fields in a given PDF
