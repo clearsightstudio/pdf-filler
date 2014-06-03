@@ -45,12 +45,12 @@ module PdfFiller
       # filled_pdf
 
       self.flatten(step_1_result.path)
-      self.secure(step_1_result.path)
+      # self.secure(step_1_result.path)
       step_1_result
     end
 
     def flatten(path)
-      `#{PATH_TO_PDFTK} #{path} flatten`
+      `#{PATH_TO_PDFTK} #{path} output #{path} flatten`
     end
 
     def secure(path)
