@@ -11,13 +11,13 @@ set :root, File.dirname(__FILE__)
 set :views, File.dirname(__FILE__) + "/views"
 
 # documentation
-get '/' do 
+get '/' do
   markdown :index, :layout => :bootstrap, :layout_engine => :liquid
 end
 
 # return a filled PDF as a result of post data
 post '/fill' do
-  send_file PdfFiller.new.fill( params['pdf'], params ).path, :type => "application/pdf", :filename => File.basename( params['pdf'] ), :disposition => :inline
+  send_file PdfFiller.new.fill( params['pdf'], params ).path, :type => "application/pdf", :filename => File.basename( params['pdf'] ), :disposition => :attachment
 end
 
 # get an HTML listing of all the fields
