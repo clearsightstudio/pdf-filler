@@ -6,9 +6,8 @@ GEM
     coderay (1.0.9)
     daemons (1.1.9)
     diff-lcs (1.2.4)
-    eventmachine (1.0.3)
+    eventmachine (1.0.7)
     hashery (2.1.0)
-    json (1.7.7)
     kramdown (1.1.0)
     liquid (2.5.0)
     logutils (0.6.0)
@@ -21,7 +20,7 @@ GEM
     multi_json (1.7.7)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
-    pdf-forms (0.5.5)
+    pdf-forms (0.6.0)
     pdf-reader (1.3.3)
       Ascii85 (~> 1.0.0)
       afm (~> 0.2.0)
@@ -77,10 +76,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  json (= 1.7.7)
   liquid
   markdown
-  pdf-forms
+  pdf-forms (~> 0.6.0)
   prawn
   pry
   rack-test
