@@ -36,7 +36,7 @@ class PdfFiller
     
     data = urldecode_keys data
     #Fill fillable fields (step 1)
-    @pdftk.fill_form source_pdf.path, step_1_result.path, data.find_all{ |key, value| !key[KEY_REGEX] }, flatten: true
+    @pdftk.fill_form source_pdf.path, step_1_result.path, data.find_all{ |key, value| !key[KEY_REGEX] }
     
     #Fill non-fillable fields (returning filled pdf)
     Prawn::Document.generate filled_pdf.path, :template => step_1_result.path do |pdf|
