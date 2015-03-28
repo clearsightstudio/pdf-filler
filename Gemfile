@@ -4,9 +4,8 @@ gem 'rake'
 gem 'sinatra'
 gem 'thin'
 gem 'liquid'
-gem 'pdf-forms'
+gem 'pdf-forms', '~> 0.6.0'
 gem 'prawn'
-gem 'json', "1.7.7"
 gem 'markdown'
 
 group :development, :test do
