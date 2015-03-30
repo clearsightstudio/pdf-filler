@@ -21,7 +21,7 @@ module PdfFiller
 
     # return a filled PDF as a result of post data
     post '/fill' do
-      send_file PdfFiller::Filler.new.fill( params['pdf'], params ).path, :type => "application/pdf", :filename => File.basename( params['pdf'] ), :disposition => :inline
+      send_file PdfFiller::Filler.new.fill( params['pdf'], params ).path, :type => "application/pdf", :filename => File.basename( params['pdf'] ), :disposition => :attachment
     end
 
     # get an HTML listing of all the fields
