@@ -18,7 +18,7 @@ module PdfFiller
     end
 
     def initialize
-      @pdftk = PdfForms.new(PATH_TO_PDFTK)
+      @pdftk = PdfForms.new(PATH_TO_PDFTK, flatten: true)
     end
 
     # Given a PDF an array of fields -> values
@@ -27,7 +27,7 @@ module PdfFiller
       url = url.to_s
       source_pdf = open( URI.escape( url ) )
       step_1_result = Tempfile.new( ['pdf', '.pdf'] )
-      filled_pdf = Tempfile.new( ['pdf', '.pdf'] )
+      #filled_pdf = Tempfile.new( ['pdf', '.pdf'] )
 
       data = urldecode_keys data
       #Fill fillable fields (step 1)
@@ -44,17 +44,7 @@ module PdfFiller
       # end
       # filled_pdf
 
-      self.flatten(step_1_result.path)
-      # self.secure(step_1_result.path)
       step_1_result
-    end
-
-    def flatten(path)
-      `#{PATH_TO_PDFTK} #{path} output #{path} flatten`
-    end
-
-    def secure(path)
-      `#{PATH_TO_PDFTK} #{path} owner_pw nc3webdev allow Printing DegradedPrinting CopyContents`
     end
 
     # Return a hash of all fields in a given PDF
