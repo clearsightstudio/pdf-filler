@@ -1,3 +1,5 @@
+ENV['LD_LIBRARY_PATH'] ||= File.join(Dir.home, 'local/lib64')
+ENV['PATH_TO_PDFTK'] ||= File.join(Dir.home, 'local/bin/pdftk')
 PATH_TO_PDFTK = ENV['PATH_TO_PDFTK'] || (File.exist?('/usr/local/bin/pdftk') ? '/usr/local/bin/pdftk' : '/usr/bin/pdftk')
 
 module PdfFiller
