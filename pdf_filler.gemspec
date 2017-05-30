@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sinatra'
   s.add_dependency 'thin'
   s.add_dependency 'liquid', '~> 2.5'
-  s.add_dependency 'pdf-forms', '~> 0.6.0'
+  s.add_dependency 'pdf-forms', '0.6.0'
   s.add_dependency 'prawn', '~> 0.12'
   s.add_dependency 'markdown', '~> 1.1'
 end
