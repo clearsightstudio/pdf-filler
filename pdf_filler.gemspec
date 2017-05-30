@@ -10,14 +10,14 @@ Gem::Specification.new do |s|
   s.authors = ["Daniel Berkompas", "GSA"]
   s.email = "support@clearsightstudio.com"
   s.summary = "A wrapper around GSA's pdf-filler service as a gem."
-  
+
   s.files = Dir.glob("{bin,lib}/**/*")
-  
+
   s.add_dependency 'rake'
   s.add_dependency 'sinatra'
   s.add_dependency 'thin'
-  s.add_dependency 'liquid'
+  s.add_dependency 'liquid', '~> 2.5'
   s.add_dependency 'pdf-forms', '~> 0.6.0'
-  s.add_dependency 'prawn'
-  s.add_dependency 'markdown'
+  s.add_dependency 'prawn', '~> 0.12'
+  s.add_dependency 'markdown', '~> 1.1'
 end
