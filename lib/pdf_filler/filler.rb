@@ -1,5 +1,5 @@
-PATH_TO_PDFTK = '/home/nc3webdev/bin/pdftk'
-# PATH_TO_PDFTK = '/usr/local/bin/pdftk'
+PATH_TO_PDFTK = ENV['PATH_TO_PDFTK'] || (File.exist?('/usr/local/bin/pdftk') ? '/usr/local/bin/pdftk' : '/usr/bin/pdftk')
+
 module PdfFiller
   class Filler
     #path to the pdftk binary
