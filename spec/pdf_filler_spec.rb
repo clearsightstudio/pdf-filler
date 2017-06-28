@@ -4,7 +4,7 @@ describe 'PdfFiller' do
   TEST_PDF = 'http://help.adobe.com/en_US/Acrobat/9.0/Samples/interactiveform_enabled.pdf'
 
   def app
-    Sinatra::Application
+    PdfFiller::App
   end
 
   describe "GET /" do
@@ -22,13 +22,13 @@ describe 'PdfFiller' do
   
   describe "POST /fill" do
     it "should return the PDF" do 
-      post "/fill", :pdf => "./spec/sample.pdf"
+      post "/fill", :pdf => "./spec/support/files/sample.pdf"
       last_response.should be_ok
       last_response.headers['Content-Type'].should eq( 'application/pdf' )
     end
     
     it "should fill fields" do
-      post "/fill", :pdf => "./spec/sample.pdf", :Name_Last => "_MYGOV_FILLABLE_", :"100,100,1" => "_MYGOV_NON_FILLABLE_"
+      post "/fill", :pdf => "./spec/support/files/sample.pdf", :Name_Last => "_MYGOV_FILLABLE_", :"100,100,1" => "_MYGOV_NON_FILLABLE_"
       
       compressed = Tempfile.new( ['pdf', '.pdf'], nil , :encoding => 'ASCII-8BIT' )
       uncompressed = Tempfile.new( ['pdf', '.pdf'], nil , :encoding => 'ASCII-8BIT' )
@@ -45,7 +45,7 @@ describe 'PdfFiller' do
     
     context "when the PDF file has weird field names" do
       it "should still fill the fields properly" do
-        post "/fill", :pdf => "./spec/ss-5.pdf", "topmostSubform%5B0%5D.Page5%5B0%5D.firstname%5B0%5D" => "_MYGOV_FILLABLE_"
+        post "/fill", :pdf => "./spec/support/files/ss-5.pdf", "topmostSubform%5B0%5D.Page5%5B0%5D.firstname%5B0%5D" => "_MYGOV_FILLABLE_"
         compressed = Tempfile.new(['pdf', '.pdf'], nil , :encoding => 'ASCII-8BIT')
         uncompressed = Tempfile.new( ['pdf', '.pdf'], nil , :encoding => 'ASCII-8BIT' )
         compressed << last_response.body
@@ -60,7 +60,7 @@ describe 'PdfFiller' do
   
   describe "GET /fields" do
     it "should output a page with all the fields" do
-      get "/fields", :pdf => './spec/sample.pdf'
+      get "/fields", :pdf => './spec/support/files/sample.pdf'
       last_response.should be_ok
       last_response.should =~ /PHD/
     end
@@ -68,7 +68,7 @@ describe 'PdfFiller' do
   
   describe "GET fields.json" do
     it "should output a valid JSON array representing the fields in the PDF" do
-      get "/fields.json", :pdf => './spec/sample.pdf'
+      get "/fields.json", :pdf => './spec/support/files/sample.pdf'
       last_response.should be_ok
       JSON.parse(last_response.body).is_a?(Array).should be_true
     end
@@ -76,7 +76,7 @@ describe 'PdfFiller' do
   
   describe "GET /form" do
     it "should create a form for the pdf based on fields" do
-      get "/form", :pdf => './spec/sample.pdf'
+      get "/form", :pdf => './spec/support/files/sample.pdf'
       last_response.should be_ok
       last_response.body.should =~ /PHD/
       last_response.body.should =~ /Emergency_Contact/
