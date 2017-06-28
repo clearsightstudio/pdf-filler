@@ -1,7 +1,3 @@
-ENV['LD_LIBRARY_PATH'] ||= File.join(Dir.home, 'local/lib64')
-ENV['PATH_TO_PDFTK'] ||= File.join(Dir.home, 'local/bin/pdftk')
-PATH_TO_PDFTK = ENV['PATH_TO_PDFTK'] || (File.exist?('/usr/local/bin/pdftk') ? '/usr/local/bin/pdftk' : '/usr/bin/pdftk')
-
 module PdfFiller
   class Filler
     #path to the pdftk binary
@@ -10,6 +6,32 @@ module PdfFiller
     # regular expression to determine if fillable or non-fillable field
     # validates 1,2 and 1,2,3
     KEY_REGEX = /^(?<x>[0-9]+),(?<y>[0-9]+)(,(?<page>[0-9]+))?$/
+
+    class << self
+
+      def config
+        @config ||= {
+          pdftk_path: default_pdftk_path,
+          pdftk_options: default_pdftk_options
+        }
+      end
+
+      def configure
+        raise "configure must be passed a block" unless block_given?
+
+        yield config
+      end
+
+      private
+
+      def default_pdftk_path
+        File.exist?('/usr/local/bin/pdftk') ? '/usr/local/bin/pdftk' : '/usr/bin/pdftk'
+      end
+
+      def default_pdftk_options
+        {flatten: true}
+      end
+    end
 
     def urldecode_keys hash
       output = Hash.new
@@ -20,7 +42,7 @@ module PdfFiller
     end
 
     def initialize
-      @pdftk = PdfForms.new(PATH_TO_PDFTK, flatten: true)
+      @pdftk = PdfForms.new(self.class.config[:pdftk_path], self.class.config[:pdftk_options])
     end
 
     # Given a PDF an array of fields -> values
